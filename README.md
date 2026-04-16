@@ -1,6 +1,6 @@
-# zero-data-transformer
+# Zero Data Transformer
 
-`zero-data-transformer` is a proof-of-concept package for layering richer data types on top of `@rocicorp/zero`. The design is directly inspired by both [tRPC's Data Transformers](https://trpc.io/docs/server/data-transformers) and [Drizzle's Custom Types](https://orm.drizzle.team/docs/custom-types).
+`zero-data-transformer` is a proof-of-concept for layering custom data types on top of `@rocicorp/zero`. The design is directly inspired by both [tRPC's Data Transformers](https://trpc.io/docs/server/data-transformers) and [Drizzle's Custom Types](https://orm.drizzle.team/docs/custom-types).
 
 A fork of `zbugs` in this repo has been ported to use `zero-data-transformer`, with `Temporal.Instant` used for the runtime values of timestamp columns and query/mutator args.
 
