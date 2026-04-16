@@ -8,6 +8,9 @@ import {fastify} from './api/index.ts';
 const jsXxhashCjsPath = fileURLToPath(
   new URL('../../node_modules/js-xxhash/dist/cjs/index.cjs', import.meta.url),
 );
+const zeroReactWrapperPath = fileURLToPath(
+  new URL('../../packages/zero-data-transformer/src/react.ts', import.meta.url),
+);
 
 async function configureServer(server: ViteDevServer) {
   await fastify.ready();
@@ -24,6 +27,7 @@ export default defineConfig({
     tsconfigPaths: true,
     dedupe: ['@rocicorp/zero', '@rocicorp/zero/react'],
     alias: {
+      '@rocicorp/zero/react': zeroReactWrapperPath,
       'js-xxhash': jsXxhashCjsPath,
     },
   },

@@ -70,10 +70,10 @@ export function createZeroWithDataTransforms<S extends Schema, C, TZero extends 
           const resolvedQuery = resolveQuery(query, target.context);
 
           if (typeof second === "function") {
-              const wrappedFactory = wrapFactoryWithDecodedViews(
-                target.schema,
-                resolvedQuery,
-                second as ViewFactory<any, S, any, unknown>,
+            const wrappedFactory = wrapFactoryWithDecodedViews(
+              target.schema,
+              resolvedQuery,
+              second as ViewFactory<any, S, any, unknown>,
             );
             return target.materialize(
               resolvedQuery,
@@ -82,8 +82,7 @@ export function createZeroWithDataTransforms<S extends Schema, C, TZero extends 
             );
           }
 
-          const view = target.materialize(resolvedQuery, second as MaterializeOptions | undefined);
-          return view;
+          return target.materialize(resolvedQuery, second as MaterializeOptions | undefined);
         };
       }
 

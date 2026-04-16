@@ -1,12 +1,17 @@
 import { useMemo } from "react";
 import {
+  ZeroContext,
+  ZeroProvider,
+  createUseZero,
+  useConnectionState,
   useQuery as baseUseQuery,
   useSuspenseQuery as baseUseSuspenseQuery,
   useZero as baseUseZero,
+  useZeroOnline,
   type MaybeQueryResult,
   type QueryResult,
   type UseQueryOptions,
-} from "@rocicorp/zero/react";
+} from "../../../node_modules/@rocicorp/zero/out/zero/src/react.js";
 import type {
   BaseDefaultContext,
   BaseDefaultSchema,
@@ -21,6 +26,14 @@ import type {
 import { decodeQueryResult } from "./query-builders.ts";
 
 export type { UseQueryOptions };
+export {
+  ZeroContext,
+  ZeroProvider,
+  createUseZero,
+  useConnectionState,
+  baseUseZero as useZero,
+  useZeroOnline,
+};
 
 export type UseSuspenseQueryOptions = UseQueryOptions & {
   suspendUntil?: "complete" | "partial";
