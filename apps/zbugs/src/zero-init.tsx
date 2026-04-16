@@ -1,0 +1,29 @@
+import type {ZeroOptions} from '@rocicorp/zero';
+import {ZeroProvider} from '@rocicorp/zero/react';
+import {useMemo, type ReactNode} from 'react';
+import {mutators} from '../shared/mutators.ts';
+import {createZero, schema} from '../shared/schema.ts';
+import {useLogin} from './hooks/use-login.tsx';
+
+export function ZeroInit({children}: {children: ReactNode}) {
+  const login = useLogin();
+
+  const zero = useMemo(
+    () =>
+      createZero({
+        schema,
+        cacheURL: import.meta.env.VITE_PUBLIC_SERVER,
+        userID: login.loginState?.decoded?.sub,
+        mutators,
+        logLevel: 'info',
+        // changing the auth token will cause ZeroProvider to call connection.connect
+        auth: login.loginState?.encoded,
+        mutateURL: `${window.location.origin}/api/mutate`,
+        queryURL: `${window.location.origin}/api/query`,
+        context: login.loginState?.decoded,
+      } satisfies ZeroOptions),
+    [login.loginState],
+  );
+
+  return <ZeroProvider zero={zero}>{children}</ZeroProvider>;
+}

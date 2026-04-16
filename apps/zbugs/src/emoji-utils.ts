@@ -1,0 +1,76 @@
+import type {Row} from '@rocicorp/zero';
+import {assert} from 'shared/src/asserts.js';
+
+export type Emoji = Row['emoji'] & {
+  readonly creator: Row['user'] | undefined;
+};
+
+export function formatEmojiCreatorList(
+  emojis: Emoji[],
+  currentUserID: string | undefined,
+): string {
+  assert(emojis.length > 0, 'Expected at least one emoji');
+  const names = emojis
+    .filter(emoji => emoji.creator !== undefined)
+    .map(emoji => {
+      const {creator} = emoji;
+      assert(creator, 'Expected emoji creator to be defined');
+      if (emoji.creatorID === currentUserID) {
+        return 'you';
+      }
+      return creator.login;
+    });
+
+  if (names.length === 0) {
+    return '';
+  }
+  if (names.length === 1) {
+    return names[0];
+  }
+
+  if (names.length > 11) {
+    return (
+      names.slice(0, 10).join(', ') + ' and ' + (names.length - 10) + ' others'
+    );
+  }
+
+  return names.slice(0, -1).join(', ') + ' and ' + names.slice(-1);
+}
+
+export function formatEmojiTooltipText(
+  emojis: Emoji[],
+  currentUserID: string | undefined,
+): string {
+  const names = formatEmojiCreatorList(emojis, currentUserID);
+  return `${names} reacted with ${emojis[0].annotation}`;
+}
+
+export function setSkinTone(emoji: string, skinTone: number): string {
+  const normalizedEmoji = normalizeEmoji(emoji);
+  if (skinTone === 0) {
+    return normalizedEmoji;
+  }
+
+  // Skin tone modifiers range from U+1F3FB to U+1F3FF
+  return normalizedEmoji + String.fromCodePoint(0x1f3fa + skinTone);
+}
+
+export function findEmojiForCreator(
+  emojis: Emoji[],
+  userID: string | undefined,
+): string | undefined {
+  if (userID === undefined) {
+    return undefined;
+  }
+  for (const emoji of emojis) {
+    if (emoji.creatorID === userID) {
+      return emoji.id;
+    }
+  }
+  return undefined;
+}
+
+export function normalizeEmoji(emoji: string): string {
+  // Skin tone modifiers range from U+1F3FB to U+1F3FF
+  return emoji.replace(/[\u{1F3FB}-\u{1F3FF}]/gu, '');
+}

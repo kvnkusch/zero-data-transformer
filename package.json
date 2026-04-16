@@ -1,0 +1,34 @@
+{
+  "name": "zero-data-transformer",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run -w zbugs dev",
+    "build": "npm run -w zbugs build",
+    "check-types": "npm run -w zbugs check-types",
+    "test": "npm run -w zbugs test",
+    "lint": "npm run -w zbugs lint",
+    "fmt": "npm run -w zbugs fmt",
+    "check-fmt": "npm run -w zbugs check-fmt"
+  },
+  "devDependencies": {
+    "@e18e/eslint-plugin": "^0.3.0",
+    "@vitest/browser": "4.1.3",
+    "@vitest/browser-playwright": "4.1.3",
+    "@vitest/coverage-v8": "4.1.3",
+    "oxfmt": "^0.45.0",
+    "oxlint": "^1.60.0",
+    "oxlint-tsgolint": "^0.20.0",
+    "tsx": "^4.21.0",
+    "vitest": "4.1.3"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "npm@10.9.2"
+}

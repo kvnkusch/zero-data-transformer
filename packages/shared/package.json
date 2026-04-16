@@ -1,0 +1,20 @@
+{
+  "name": "shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check-types": "tsc",
+    "fmt": "oxfmt .",
+    "check-fmt": "oxfmt --check ."
+  },
+  "dependencies": {
+    "@badrap/valita": "0.3.11",
+    "@dotenvx/dotenvx": "^1.39.0"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.45.0",
+    "typescript": "~6.0.2",
+    "vitest": "4.1.3"
+  }
+}

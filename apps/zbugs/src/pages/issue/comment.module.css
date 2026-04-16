@@ -1,0 +1,54 @@
+.commentItem {
+  margin-bottom: 1rem;
+  background-color: var(--color-nav-selected);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.permalinked {
+  background-color: rgb(50, 35, 24);
+}
+
+.commentItem:last-child {
+  margin-bottom: 0;
+}
+
+.commentAuthor {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.commentActions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.commentTimestamp {
+  position: absolute;
+  top: 1.3125rem;
+  right: 1.3125rem;
+  font-size: var(--typo-label-size);
+  font-weight: var(--typo-label-weight);
+  opacity: 0.6;
+}
+
+.commentActions button {
+  color: var(--color-text-primary-active);
+  opacity: 0.6;
+  font-size: var(--typo-label-size);
+  font-weight: var(--typo-label-weight);
+  transition: opacity 0.3s ease-in-out;
+  border: 1px solid var(--color-text-dimmed-label);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.commentActions button.edit-comment-cancel {
+  border: 1px solid var(--color-background);
+}
+
+.commentActions button:enabled:hover {
+  opacity: 1;
+}
